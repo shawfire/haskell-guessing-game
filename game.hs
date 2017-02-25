@@ -1,13 +1,21 @@
 
 import System.Random
 
+tooLow secret_number = do
+  print "Too low... :("
+  game secret_number
+
+tooHigh secret_number = do
+  print "Too high... :("
+  game secret_number
+
 game :: Int -> IO ()
 game secret_number = do
   print "Enter your guess between 1 and 10 ? "
   guess <- readLn
   case compare guess secret_number
-    of  GT -> print "Too high... :("
-        LT -> print "Too low... :("
+    of  GT -> tooHigh secret_number
+        LT -> tooLow secret_number
         EQ -> print "You win!"
 
 main :: IO ()
